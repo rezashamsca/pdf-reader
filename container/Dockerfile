@@ -21,4 +21,7 @@ COPY ./app/pipeline.py /app/pipeline.py
 
 WORKDIR /app
 
-ENTRYPOINT ["python3", "pipeline.py"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
