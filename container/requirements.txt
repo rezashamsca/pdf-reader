@@ -1,0 +1,4 @@
+camelot-py[cv]
+pandas
+duckdb
+requests

@@ -3,12 +3,22 @@
 FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl unzip ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+    curl unzip ca-certificates python3 python3-pip && \
+    rm -rf /var/lib/apt/lists*
+
+COPY requirements.txt /tmp/requirements.txt
+
+RUN pip install --no-cache-dir --break-system-packages -r /tmp/requirements.txt
 
 RUN curl -L -o duckdb.zip "https://github.com/duckdb/duckdb/releases/download/v1.5.2/duckdb_cli-linux-arm64.zip" && \
     unzip duckdb.zip -d /usr/local/bin/ && \
     chmod +x /usr/local/bin/duckdb && \
     rm duckdb.zip
 
-ENTRYPOINT ["duckdb"]
+RUN mkdir -p /app
+
+COPY ./app/pipeline.py /app/pipeline.py
+
+WORKDIR /app
+
+ENTRYPOINT ["python3", "pipeline.py"]

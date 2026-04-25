@@ -7,7 +7,7 @@ import json
 con = duckdb.connect()
 
 # load all CSV files from the data folder
-data_folder = "./data"
+data_folder = "/data"
 tables = []
 
 for filename in os.listdir(data_folder):
