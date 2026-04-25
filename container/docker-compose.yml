@@ -1,0 +1,17 @@
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  duckdb:
+    build: .
+    volumes:
+      - ./data:/data
+    stdin_open: true
+    tty: true
+
+volumes:
+  ollama_data:
