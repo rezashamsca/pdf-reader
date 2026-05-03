@@ -1,0 +1,5 @@
+{
+  "model": "duckdb-nsql:7b-q8_0",
+  "prompt": "You have a table called Chequing_Statement_2041_2025_11_21_table_2. List all of the expenses in the table",
+  "stream": false
+}

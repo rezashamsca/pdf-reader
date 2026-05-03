@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv
+env/
+venv/
+ENV/
+
+# IDEs & editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Data (large files)
+input/
+output/
+data/
+*.pdf
+*.csv
+
+# Documentation
+*.md
+LICENSE
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.circleci/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+.tmp/
+*.tmp
+*.log

@@ -51,3 +51,6 @@ htmlcov/
 
 # Docker
 ollama_data/
+
+# Prompts
+*.prompt.json

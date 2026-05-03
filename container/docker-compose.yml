@@ -5,13 +5,44 @@ services:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ollama-setup:
+    image: ollama/ollama
+    depends_on:
+      ollama:
+        condition: service_healthy
+    networks:
+      - app-network
+    entrypoint: >
+      sh -c "ollama pull duckdb-nsql:7b-q8_0"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    restart: "no"
 
   duckdb:
-    build: .
+    image: rezshams/duckdb-alpine:1.0.1
     volumes:
       - ./data:/data
+    depends_on:
+      ollama-setup:
+        condition: service_completed_successfully
+    networks:
+      - app-network
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
     stdin_open: true
     tty: true
 
 volumes:
   ollama_data:
+
+networks:
+  app-network:
+    driver: bridge
